@@ -9,6 +9,15 @@ export class LoginBodyDto {
     password: string;
 }
 
+export class LoginResDto {
+    accessToken: string;
+    refreshToken: string;
+
+    constructor(partial: Partial<LoginResDto>) {
+        Object.assign(this, partial);
+    }
+}
+
 export class RegisterBodyDto extends LoginBodyDto {
     @IsString({ message: 'Name must be a string' })
     name: string;
@@ -17,22 +26,6 @@ export class RegisterBodyDto extends LoginBodyDto {
     confirmPassword: string;
 }
 
-// export class RegisterResDto {
-//     id: number;
-//     email: string;
-//     name: string;
-//     @Exclude() password: string;
-//     createdAt: Date
-//     updatedAt: Date
-
-//     // @Expose()
-//     // get emailName() {
-//     //     return `${this.email} -${this.name}`
-//     // }
-//     constructor(partial: Partial<RegisterResDto>) {
-//         Object.assign(this, partial);
-//     }
-// }
 export class RegisterResDto extends SuccessResDto{
     @Type(() => RegisterResDto)
     data: RegisterResDto;
